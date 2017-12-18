@@ -1,0 +1,320 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.heroku.mapper.SdaMaSetsubishubetsuMapper" >
+  <resultMap id="BaseResultMap" type="com.heroku.entity.SdaMaSetsubishubetsu" >
+    <id column="sda_bumoncd" property="sdaBumoncd" jdbcType="CHAR" />
+    <id column="sda_setsubishubetsucd" property="sdaSetsubishubetsucd" jdbcType="CHAR" />
+    <result column="sda_setsubishubetsunm" property="sdaSetsubishubetsunm" jdbcType="VARCHAR" />
+    <result column="sda_displayno" property="sdaDisplayno" jdbcType="INTEGER" />
+    <result column="sda_mishiyof" property="sdaMishiyof" jdbcType="CHAR" />
+    <result column="sda_makeuserid" property="sdaMakeuserid" jdbcType="CHAR" />
+    <result column="sda_maketime" property="sdaMaketime" jdbcType="TIMESTAMP" />
+    <result column="sda_updateuserid" property="sdaUpdateuserid" jdbcType="CHAR" />
+    <result column="sda_updatetime" property="sdaUpdatetime" jdbcType="TIMESTAMP" />
+    <result column="sda_updateclient" property="sdaUpdateclient" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="BaseResultMap2" type="HashMap" >
+    <id column="sda_bumoncd" property="sdaBumoncd" jdbcType="CHAR" />
+    <id column="sda_setsubishubetsucd" property="value" jdbcType="CHAR" />
+    <result column="sda_setsubishubetsunm" property="text" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    sda_bumoncd, sda_setsubishubetsucd, sda_setsubishubetsunm, sda_displayno, sda_mishiyof, 
+    sda_makeuserid, sda_maketime, sda_updateuserid, sda_updatetime, sda_updateclient
+  </sql>
+  <sql id="Base_Column_List2" >
+    sda_bumoncd, sda_setsubishubetsucd, sda_setsubishubetsunm
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.heroku.entity.SdaMaSetsubishubetsuExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from public.sda_ma_setsubishubetsu
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.heroku.entity.SdaMaSetsubishubetsuKey" >
+    select 
+    <include refid="Base_Column_List" />
+    from public.sda_ma_setsubishubetsu
+    where sda_bumoncd = #{sdaBumoncd,jdbcType=CHAR}
+      and sda_setsubishubetsucd = #{sdaSetsubishubetsucd,jdbcType=CHAR}
+  </select>
+  <select id="selectByExample2" resultMap="BaseResultMap2" parameterType="com.heroku.entity.SdaMaSetsubishubetsuExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List2" />
+    from public.sda_ma_setsubishubetsu
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey2" resultMap="BaseResultMap2" parameterType="com.heroku.entity.SdaMaSetsubishubetsuKey" >
+    select
+    <include refid="Base_Column_List2" />
+    from public.sda_ma_setsubishubetsu
+    where sda_bumoncd = #{sdaBumoncd,jdbcType=CHAR}
+    and sda_setsubishubetsucd = #{sdaSetsubishubetsucd,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.heroku.entity.SdaMaSetsubishubetsuKey" >
+    delete from public.sda_ma_setsubishubetsu
+    where sda_bumoncd = #{sdaBumoncd,jdbcType=CHAR}
+      and sda_setsubishubetsucd = #{sdaSetsubishubetsucd,jdbcType=CHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.heroku.entity.SdaMaSetsubishubetsuExample" >
+    delete from public.sda_ma_setsubishubetsu
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.heroku.entity.SdaMaSetsubishubetsu" >
+    insert into public.sda_ma_setsubishubetsu (sda_bumoncd, sda_setsubishubetsucd, sda_setsubishubetsunm, 
+      sda_displayno, sda_mishiyof, sda_makeuserid, 
+      sda_maketime, sda_updateuserid, sda_updatetime, 
+      sda_updateclient)
+    values (#{sdaBumoncd,jdbcType=CHAR}, #{sdaSetsubishubetsucd,jdbcType=CHAR}, #{sdaSetsubishubetsunm,jdbcType=VARCHAR}, 
+      #{sdaDisplayno,jdbcType=INTEGER}, #{sdaMishiyof,jdbcType=CHAR}, #{sdaMakeuserid,jdbcType=CHAR}, 
+      #{sdaMaketime,jdbcType=TIMESTAMP}, #{sdaUpdateuserid,jdbcType=CHAR}, #{sdaUpdatetime,jdbcType=TIMESTAMP}, 
+      #{sdaUpdateclient,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.heroku.entity.SdaMaSetsubishubetsu" >
+    insert into public.sda_ma_setsubishubetsu
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="sdaBumoncd != null" >
+        sda_bumoncd,
+      </if>
+      <if test="sdaSetsubishubetsucd != null" >
+        sda_setsubishubetsucd,
+      </if>
+      <if test="sdaSetsubishubetsunm != null" >
+        sda_setsubishubetsunm,
+      </if>
+      <if test="sdaDisplayno != null" >
+        sda_displayno,
+      </if>
+      <if test="sdaMishiyof != null" >
+        sda_mishiyof,
+      </if>
+      <if test="sdaMakeuserid != null" >
+        sda_makeuserid,
+      </if>
+      <if test="sdaMaketime != null" >
+        sda_maketime,
+      </if>
+      <if test="sdaUpdateuserid != null" >
+        sda_updateuserid,
+      </if>
+      <if test="sdaUpdatetime != null" >
+        sda_updatetime,
+      </if>
+      <if test="sdaUpdateclient != null" >
+        sda_updateclient,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="sdaBumoncd != null" >
+        #{sdaBumoncd,jdbcType=CHAR},
+      </if>
+      <if test="sdaSetsubishubetsucd != null" >
+        #{sdaSetsubishubetsucd,jdbcType=CHAR},
+      </if>
+      <if test="sdaSetsubishubetsunm != null" >
+        #{sdaSetsubishubetsunm,jdbcType=VARCHAR},
+      </if>
+      <if test="sdaDisplayno != null" >
+        #{sdaDisplayno,jdbcType=INTEGER},
+      </if>
+      <if test="sdaMishiyof != null" >
+        #{sdaMishiyof,jdbcType=CHAR},
+      </if>
+      <if test="sdaMakeuserid != null" >
+        #{sdaMakeuserid,jdbcType=CHAR},
+      </if>
+      <if test="sdaMaketime != null" >
+        #{sdaMaketime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sdaUpdateuserid != null" >
+        #{sdaUpdateuserid,jdbcType=CHAR},
+      </if>
+      <if test="sdaUpdatetime != null" >
+        #{sdaUpdatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sdaUpdateclient != null" >
+        #{sdaUpdateclient,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.heroku.entity.SdaMaSetsubishubetsuExample" resultType="java.lang.Integer" >
+    select count(*) from public.sda_ma_setsubishubetsu
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update public.sda_ma_setsubishubetsu
+    <set >
+      <if test="record.sdaBumoncd != null" >
+        sda_bumoncd = #{record.sdaBumoncd,jdbcType=CHAR},
+      </if>
+      <if test="record.sdaSetsubishubetsucd != null" >
+        sda_setsubishubetsucd = #{record.sdaSetsubishubetsucd,jdbcType=CHAR},
+      </if>
+      <if test="record.sdaSetsubishubetsunm != null" >
+        sda_setsubishubetsunm = #{record.sdaSetsubishubetsunm,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sdaDisplayno != null" >
+        sda_displayno = #{record.sdaDisplayno,jdbcType=INTEGER},
+      </if>
+      <if test="record.sdaMishiyof != null" >
+        sda_mishiyof = #{record.sdaMishiyof,jdbcType=CHAR},
+      </if>
+      <if test="record.sdaMakeuserid != null" >
+        sda_makeuserid = #{record.sdaMakeuserid,jdbcType=CHAR},
+      </if>
+      <if test="record.sdaMaketime != null" >
+        sda_maketime = #{record.sdaMaketime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.sdaUpdateuserid != null" >
+        sda_updateuserid = #{record.sdaUpdateuserid,jdbcType=CHAR},
+      </if>
+      <if test="record.sdaUpdatetime != null" >
+        sda_updatetime = #{record.sdaUpdatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.sdaUpdateclient != null" >
+        sda_updateclient = #{record.sdaUpdateclient,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update public.sda_ma_setsubishubetsu
+    set sda_bumoncd = #{record.sdaBumoncd,jdbcType=CHAR},
+      sda_setsubishubetsucd = #{record.sdaSetsubishubetsucd,jdbcType=CHAR},
+      sda_setsubishubetsunm = #{record.sdaSetsubishubetsunm,jdbcType=VARCHAR},
+      sda_displayno = #{record.sdaDisplayno,jdbcType=INTEGER},
+      sda_mishiyof = #{record.sdaMishiyof,jdbcType=CHAR},
+      sda_makeuserid = #{record.sdaMakeuserid,jdbcType=CHAR},
+      sda_maketime = #{record.sdaMaketime,jdbcType=TIMESTAMP},
+      sda_updateuserid = #{record.sdaUpdateuserid,jdbcType=CHAR},
+      sda_updatetime = #{record.sdaUpdatetime,jdbcType=TIMESTAMP},
+      sda_updateclient = #{record.sdaUpdateclient,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.heroku.entity.SdaMaSetsubishubetsu" >
+    update public.sda_ma_setsubishubetsu
+    <set >
+      <if test="sdaSetsubishubetsunm != null" >
+        sda_setsubishubetsunm = #{sdaSetsubishubetsunm,jdbcType=VARCHAR},
+      </if>
+      <if test="sdaDisplayno != null" >
+        sda_displayno = #{sdaDisplayno,jdbcType=INTEGER},
+      </if>
+      <if test="sdaMishiyof != null" >
+        sda_mishiyof = #{sdaMishiyof,jdbcType=CHAR},
+      </if>
+      <if test="sdaMakeuserid != null" >
+        sda_makeuserid = #{sdaMakeuserid,jdbcType=CHAR},
+      </if>
+      <if test="sdaMaketime != null" >
+        sda_maketime = #{sdaMaketime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sdaUpdateuserid != null" >
+        sda_updateuserid = #{sdaUpdateuserid,jdbcType=CHAR},
+      </if>
+      <if test="sdaUpdatetime != null" >
+        sda_updatetime = #{sdaUpdatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sdaUpdateclient != null" >
+        sda_updateclient = #{sdaUpdateclient,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where sda_bumoncd = #{sdaBumoncd,jdbcType=CHAR}
+      and sda_setsubishubetsucd = #{sdaSetsubishubetsucd,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.heroku.entity.SdaMaSetsubishubetsu" >
+    update public.sda_ma_setsubishubetsu
+    set sda_setsubishubetsunm = #{sdaSetsubishubetsunm,jdbcType=VARCHAR},
+      sda_displayno = #{sdaDisplayno,jdbcType=INTEGER},
+      sda_mishiyof = #{sdaMishiyof,jdbcType=CHAR},
+      sda_makeuserid = #{sdaMakeuserid,jdbcType=CHAR},
+      sda_maketime = #{sdaMaketime,jdbcType=TIMESTAMP},
+      sda_updateuserid = #{sdaUpdateuserid,jdbcType=CHAR},
+      sda_updatetime = #{sdaUpdatetime,jdbcType=TIMESTAMP},
+      sda_updateclient = #{sdaUpdateclient,jdbcType=VARCHAR}
+    where sda_bumoncd = #{sdaBumoncd,jdbcType=CHAR}
+      and sda_setsubishubetsucd = #{sdaSetsubishubetsucd,jdbcType=CHAR}
+  </update>
+</mapper>
