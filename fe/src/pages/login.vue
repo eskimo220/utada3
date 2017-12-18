@@ -3,20 +3,20 @@
 	  	<transition name="form-fade" mode="in-out">
 	  		<section class="form_contianer" v-show="showLogin">
 		  		<div class="manage_tip">
-		  			<p>elm后台管理系统</p>
+		  			<p>{{ $t("message.systemTitle") }}</p>
 		  		</div>
-		    	<el-form :model="loginForm" :rules="rules" ref="loginForm">
+		    	<el-form :model="loginForm" :rules="therules" ref="loginForm">
 					<el-form-item prop="username">
-						<el-input v-model="loginForm.username" placeholder="用户名" ><span>dsfsf</span></el-input>
+						<el-input v-model="loginForm.username" :placeholder="$t('message.userName')" ><span>dsfsf</span></el-input>
 					</el-form-item>
 					<el-form-item prop="password">
-						<el-input type="password" placeholder="密码" v-model="loginForm.password"></el-input>
+						<el-input type="password" :placeholder="$t('message.password')" v-model="loginForm.password"></el-input>
 					</el-form-item>
 					<el-form-item>
-				    	<el-button type="primary" @click="submitForm('loginForm')" class="submit_btn">登陆</el-button>
+				    	<el-button type="primary" @click.stop.prevent="submitForm('loginForm')" class="submit_btn">{{ $t("message.login") }}</el-button>
 				  	</el-form-item>
 				</el-form>
-				<p class="tip">温馨提示：</p>
+				<p class="tip">{{ $t("message.love") }}</p>
 				<p class="tip">未登录过的新用户，自动注册</p>
 				<p class="tip">注册过的用户可凭账号密码登录</p>
 	  		</section>
@@ -27,7 +27,7 @@
 <script>
 	// import {login, getAdminInfo} from '@/api/getData'
 	// import {mapActions, mapState} from 'vuex'
-
+import Vue from 'vue'
 	export default {
 	    data(){
 			return {
@@ -35,25 +35,29 @@
 					username: '',
 					password: '',
 				},
-				rules: {
-					username: [
-			            { required: true, message: '请输入用户名', trigger: 'blur,change' },
-			        ],
-					password: [
-						{ required: true, message: '请输入密码', trigger: 'blur,change' }
-					],
-				},
 				showLogin: false,
 			}
 		},
 		mounted(){
 			this.showLogin = true;
+			
 		},
 		computed: {
-
+			therules(){
+				return {
+					username: [
+			            { required: true, message: this.$t('message.pleaseInput', [this.$t('message.userName')]), trigger: 'blur,change' },
+			        ],
+					password: [
+						{ required: true, message: this.$t('message.pleaseInput', [this.$t('message.password')]), trigger: 'blur,change' }
+					],
+				};
+			}
 		},
 		methods: {
-
+			submitForm(){
+			Vue.config.lang = Vue.config.lang =='zh' ? "ja" : "zh";
+			}
 		},
 		watch: {
 
