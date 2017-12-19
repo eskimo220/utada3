@@ -1,27 +1,27 @@
 <template>
-	<div class="login_page fillcontain">
-		<transition name="form-fade" mode="in-out">
-			<section class="form_contianer" v-show="showLogin">
-				<div class="manage_tip">
-					<p>{{ $t("message.systemTitle") }}</p>
-				</div>
-				<el-form :model="loginForm" :rules="rule" ref="loginForm">
-					<el-form-item prop="username">
-						<el-input v-model="loginForm.username" :placeholder="$t('message.userName')">
-							<span>dsfsf</span>
-						</el-input>
-					</el-form-item>
-					<el-form-item prop="password">
-						<el-input type="password" :placeholder="$t('message.password')" v-model="loginForm.password"></el-input>
-					</el-form-item>
-					<el-form-item>
-						<el-button type="primary" @click.stop.prevent="submitForm('loginForm')" class="submit_btn">{{ $t("message.login") }}</el-button>
-					</el-form-item>
-				</el-form>
-				<p class="tip" v-for="(one, index) in $t('message.loginMessage')" :key='index'>{{ one }}</p>
-			</section>
-		</transition>
-	</div>
+  <div class="login_page fillcontain">
+    <transition name="form-fade" mode="in-out">
+      <section class="form_contianer" v-show="showLogin">
+        <div class="manage_tip">
+          <p>{{ $t("message.systemTitle") }}</p>
+        </div>
+        <el-form :model="loginForm" :rules="rule" ref="loginForm">
+          <el-form-item prop="username">
+            <el-input v-model="loginForm.username" :placeholder="$t('message.userName')">
+              <span>dsfsf</span>
+            </el-input>
+          </el-form-item>
+          <el-form-item prop="password">
+            <el-input type="password" :placeholder="$t('message.password')" v-model="loginForm.password"></el-input>
+          </el-form-item>
+          <el-form-item>
+            <el-button type="primary" @click.stop.prevent="submitForm('loginForm')" class="submit_btn">{{ $t("message.login") }}</el-button>
+          </el-form-item>
+        </el-form>
+        <p class="tip" v-for="(one, index) in $t('message.loginMessage')" :key='index'>{{ one }}</p>
+      </section>
+    </transition>
+  </div>
 </template>
 
 <script>

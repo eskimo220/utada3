@@ -1,6 +1,8 @@
 <template>
 	<el-container class="fillcontain">
-		<el-header>Header</el-header>
+		<el-header>
+			<theheader/>
+		</el-header>
 		<el-container>
 			<el-aside width="250px">
 				<el-menu :default-active="this.$route.path.replace('/', '')" background-color="#324057" text-color="#fff" style="height: 100%;" router>
@@ -53,7 +55,12 @@
 </template>
 
 <script>
-export default {};
+import theheader from "../components/header";
+export default {
+  components: {
+    theheader
+  }
+};
 </script>
 <style lang="scss">
 @import "../style/mixin";
