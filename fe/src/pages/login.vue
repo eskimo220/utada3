@@ -5,7 +5,7 @@
 		  		<div class="manage_tip">
 		  			<p>{{ $t("message.systemTitle") }}</p>
 		  		</div>
-		    	<el-form :model="loginForm" :rules="therules" ref="loginForm">
+		    	<el-form :model="loginForm" :rules="rule" ref="loginForm">
 					<el-form-item prop="username">
 						<el-input v-model="loginForm.username" :placeholder="$t('message.userName')" ><span>dsfsf</span></el-input>
 					</el-form-item>
@@ -16,9 +16,7 @@
 				    	<el-button type="primary" @click.stop.prevent="submitForm('loginForm')" class="submit_btn">{{ $t("message.login") }}</el-button>
 				  	</el-form-item>
 				</el-form>
-				<p class="tip">{{ $t("message.love") }}</p>
-				<p class="tip">未登录过的新用户，自动注册</p>
-				<p class="tip">注册过的用户可凭账号密码登录</p>
+				<p class="tip" v-for="(one, index) in $t('message.loginMessage')" :key='index'>{{ one }}</p>
 	  		</section>
 	  	</transition>
   	</div>
@@ -27,7 +25,7 @@
 <script>
 	// import {login, getAdminInfo} from '@/api/getData'
 	// import {mapActions, mapState} from 'vuex'
-import Vue from 'vue'
+	import Vue from 'vue';
 	export default {
 	    data(){
 			return {
@@ -36,6 +34,14 @@ import Vue from 'vue'
 					password: '',
 				},
 				showLogin: false,
+				rule : {
+					username: [
+			            { required: true, message: this.$t('message.pleaseInput', [this.$t('message.userName')]), trigger: 'blur,change' },
+			        ],
+					password: [
+						{ required: true, message: this.$t('message.pleaseInput', [this.$t('message.password')]), trigger: 'blur,change' }
+					],
+				}
 			}
 		},
 		mounted(){
@@ -43,24 +49,28 @@ import Vue from 'vue'
 			
 		},
 		computed: {
-			therules(){
-				return {
-					username: [
-			            { required: true, message: this.$t('message.pleaseInput', [this.$t('message.userName')]), trigger: 'blur,change' },
-			        ],
-					password: [
-						{ required: true, message: this.$t('message.pleaseInput', [this.$t('message.password')]), trigger: 'blur,change' }
-					],
-				};
-			}
+
 		},
-		methods: {
+		methods: 
+		{
+			message1(){
+			this.rule.username[0].message = this.$t('message.pleaseInput', [this.$t('message.userName')]);
+			this.rule.password[0].message = this.$t('message.pleaseInput', [this.$t('message.password')]);
+			},
+
 			submitForm(){
-			Vue.config.lang = Vue.config.lang =='zh' ? "ja" : "zh";
+			// Vue.config.lang = Vue.config.lang =='zh' ? "ja" : "zh";
+			// this.message1();
+			// //this.$refs["loginForm"].resetFields();
+			// this.$refs["loginForm"].clearValidate();
+			this.$message({
+				type: 'success',
+				message: this.$t('message.loginMessage')
+				});
+			this.$router.push('manage');
 			}
 		},
 		watch: {
-
 		}
 	}
 </script>

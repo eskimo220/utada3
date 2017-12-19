@@ -8,6 +8,11 @@ message: {
     systemTitle: 'elmUI..システム',
     pleaseInput: '{0}を入力してください',
     login: 'ログイン',
+    loginMessage : [
+      "ヒント:",
+      "ユーザ名パスワードが自由入力",
+      "自動登録となり、次回から使える"
+    ]
   }
 };
 
