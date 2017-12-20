@@ -1,10 +1,10 @@
 <template>
 	<el-container class="fillcontain">
-		<el-header>
+		<el-header height="55px">
 			<theheader/>
 		</el-header>
 		<el-container>
-			<el-aside width="250px">
+			<el-aside width="210px">
 				<el-menu :default-active="this.$route.path.replace('/', '')" background-color="#324057" text-color="#fff" style="height: 100%;" router>
 					<el-menu-item index="manage">
 						<i class="el-icon-menu"></i>首页</el-menu-item>

@@ -8,11 +8,17 @@ message: {
     systemTitle: 'elm后台管理系统',
     pleaseInput: '请输入{0}',
     login: '登录',
+    content: '内容',
     loginMessage : [
       "温馨提示：",
       "未登录过的新用户，自动注册",
       "注册过的用户可凭账号密码登录"
+    ],
+    topNav: [
+      '处理中心',
+      '资源'
     ]
+
   }
 };
 
