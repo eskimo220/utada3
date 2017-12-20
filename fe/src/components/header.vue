@@ -6,22 +6,21 @@
     </h1>
     <el-menu :default-active="activeIndex" class="el-menu-demo logo-right" mode="horizontal" style="border-bottom:0px;">
       <li tabindex="0" class="el-menu-item" style="cursor: auto;">
-        <el-input placeholder="请输入内容" prefix-icon="el-icon-search" v-model="input21" size="mini">
+        <el-input :placeholder="$t('message.pleaseInput', [$t('message.content')])" prefix-icon="el-icon-search" v-model="input21" size="mini">
         </el-input>
       </li>
-      <el-menu-item index="1">处理中心</el-menu-item>
-      <el-menu-item index="3">
-        <a href="https://www.ele.me" target="_blank">订单管理</a>
+      <el-menu-item index="1">{{$t('message.topNav[0]')}}</el-menu-item>
+      <el-menu-item index="2">
+        <a href="https://www.ele.me" target="_blank">{{$t('message.topNav[1]')}}</a>
       </el-menu-item>
       <li tabindex="0" class="el-menu-item">
-        <el-dropdown style="line-height: 14px;font-size: 14px;">
+        <el-dropdown style="line-height: 14px;font-size: 14px;" @visible-change="visblechange" @command="handleCommand">
           <span class="el-dropdown-link">
-            语言
-            <i class="el-icon-arrow-down" style="line-height: 14px;font-size: 14px;"></i>
+            {{selectedlang}}
+            <i class="el-icon-arrow-down" :class="{'el-icon-arrow-down-isactive' : openorclose}" style="line-height: 14px;font-size: 14px;"></i>
           </span>
           <el-dropdown-menu slot="dropdown">
-            <el-dropdown-item>中文</el-dropdown-item>
-            <el-dropdown-item>日语</el-dropdown-item>
+            <el-dropdown-item v-for="(one , index) in lang" :key="index" :command="one">{{one}}</el-dropdown-item>
           </el-dropdown-menu>
         </el-dropdown>
       </li>
@@ -30,63 +29,52 @@
 </template>
 
 <script>
-export default {};
+import Vue from "vue";
+export default {
+  data() {
+    return {
+      openorclose: false,
+      selectedlang: "日本語",
+      lang: ["中文", "日本語"]
+    };
+  },
+  methods: {
+    visblechange(o) {
+      console.log(o);
+      this.openorclose = o;
+    },
+    handleCommand(command) {
+      this.selectedlang = command;
+      Vue.config.lang =
+        this.selectedlang == "中文"
+          ? "zh"
+          : this.selectedlang == "日本語" ? "ja" : "ja";
+    }
+  }
+};
 </script>
 <style lang="scss">
 .logo-h1 {
   float: left;
-  line-height: 85px;
+  line-height: 80px;
   min-width: 210px;
 }
 .logo-right {
   float: right;
 }
-.drop-lang {
-  line-height: 14px;
-  font-size: 14px;
-}
 .el-dropdown-link {
   cursor: pointer;
   color: #409eff;
 }
-.hamburger {
-  display: block;
-  position: relative;
-  font-size: 0;
-  width: 48px;
-  height: 48px;
-  border: none;
-  cursor: pointer;
+.el-icon-arrow-down {
+  transition: 0.2s;
 }
-
-.hamburger:focus {
-  outline: none;
+.el-icon-arrow-down-isactive {
+  transform: rotate(180deg) translateY(3px);
 }
-
-.hamburger span {
-  display: block;
-  position: absolute;
-  height: 4px;
-  top: 22px;
-  left: 8px;
-  right: 8px;
-  background-color: #fff;
-}
-
-.hamburger span:before,
-.hamburger span:after {
-  content: "";
-  display: block;
-  position: absolute;
-  width: 100%;
-  height: 4px;
-  background: #fff;
-}
-.hamburger span:before {
-  top: -10px;
-}
-.hamburger span:after {
-  bottom: -10px;
+.el-menu-item {
+  height: 55px !important;
+  line-height: 55px !important;
 }
 </style>
 
